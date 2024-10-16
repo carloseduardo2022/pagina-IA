@@ -1,4 +1,4 @@
-const caixaPrincipal = document.querySelector("caixa-primcipal")
+const caixaPrincipal = document.querySelector("caixa-principal")
 const caixaPerguntas = document.querySelector("caixa-perguntas")
 const caixaAlternativas = document.querySelector("caixa-alternativas")
 const caixaResultados = document.querySelector("caixa-resultados")
@@ -9,8 +9,15 @@ const perguntas = [
         enunciado: "quantas champions tem o cr7 (Cristiano Ronaldo)?",
         
         alternativas:[
-            "quatro",
-            "cinco",
+            {
+                texto:  "quatro",
+                afirmacao: "afirmação"
+            },
+            {
+                texto:  "cinco",
+                afirmacao: "afirmação",
+            }
+           
         ]
 
     },
@@ -19,8 +26,15 @@ const perguntas = [
         enunciado: "quantas bolas de ouro tem o cr7 (cristiano ronaldo)",
 
         alternativas:[
-            "quatro",
-            "cinco"
+            {
+                texto:  "quatro",
+                afirmacao: "afirmação"
+            },
+            {
+                texto:  "cinco",
+                afirmacao: "afirmação",
+            }
+           
         ]
     },
     {
@@ -28,8 +42,15 @@ const perguntas = [
         enunciado: "Qual é a idade de Cristiano Ronaldo? ",
 
         alternativas:[
-            "37 anos",
-            "39 anos"
+            {
+                texto:  "37 anos",
+                afirmacao: "afirmação"
+            },
+            {
+                texto:  "39 anos",
+                afirmacao: "afirmação",
+            }
+            
         ]
     },
     {
@@ -37,12 +58,41 @@ const perguntas = [
         enunciado: "aonde nasceu Cristiano Ronaldo?",
 
         alternativas:[
-            "ilha da madeira",
-            "lisboa"
+            {
+                texto:  "ilha da madeira",
+                afirmacao: "afirmação"
+            },
+            {
+                texto:  "lisboa",
+                afirmacao: "afirmação",
+            }
+           
         ]
     }
 
 
+];
 
+let atual = 0;
+let perguntaAtual;
 
-]
+function mostraPergunta() {
+    perguntaAtual = perguntas [atual];
+    caixaPerguntas.textContent = perguntaAtual.enunciado;
+    mostraAlternativa();
+
+}
+
+function mostraAlternativa() {
+    for(const alternativa of perguntaAtual.alternativas){
+        const botaoAlternativas = document.createElement("button");
+        botaoAlternativas.textContent = alternativa.texto;
+        botaoAlternativas.addEventListener("click",function(){
+            atual++;
+            mostraPergunta();
+        });
+        caixaAlternativas.appendChild(botaoAlternativas);
+    }
+}
+
+mostraPergunta();
