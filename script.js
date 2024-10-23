@@ -1,8 +1,8 @@
-const caixaPrincipal = document.querySelector("caixa-principal")
-const caixaPerguntas = document.querySelector("caixa-perguntas")
-const caixaAlternativas = document.querySelector("caixa-alternativas")
-const caixaResultados = document.querySelector("caixa-resultados")
-const textoResultados = document.querySelector("texto-resultados")
+const caixaPrincipal = document.querySelector (".caixa-principal");
+const caixaPerguntas = document.querySelector (".caixa-perguntas");
+const caixaAlternativas = document.querySelector (".caixa-alternativas");
+const caixaResultados = document.querySelector (".caixa-resultados");
+const textoResultados = document.querySelector (".texto-resultados");
 
 const perguntas = [
     {
@@ -39,7 +39,7 @@ const perguntas = [
     },
     {
 
-        enunciado: "Qual é a idade de Cristiano Ronaldo? ",
+        enunciado: "Qual é a idade de cr7 (cristiano ronaldo)? ",
 
         alternativas:[
             {
@@ -55,9 +55,9 @@ const perguntas = [
     },
     {
 
-        enunciado: "aonde nasceu Cristiano Ronaldo?",
+        enunciado: "aonde nasceu cr7 (cristiano ronaldo)?",
 
-        alternativas:[
+        alternativas:[Em 19999999
             {
                 texto:  "ilha da madeira",
                 afirmacao: "afirmação"
@@ -75,10 +75,16 @@ const perguntas = [
 
 let atual = 0;
 let perguntaAtual;
+let historiaFinal = "";
 
 function mostraPergunta() {
+    if(atual >= perguntas.length){
+        mostraResultado();
+        return;
+    }
     perguntaAtual = perguntas [atual];
     caixaPerguntas.textContent = perguntaAtual.enunciado;
+    caixaAlternativas.textContent = "";
     mostraAlternativa();
 
 }
@@ -87,12 +93,20 @@ function mostraAlternativa() {
     for(const alternativa of perguntaAtual.alternativas){
         const botaoAlternativas = document.createElement("button");
         botaoAlternativas.textContent = alternativa.texto;
-        botaoAlternativas.addEventListener("click",function(){
-            atual++;
-            mostraPergunta();
-        });
+        botaoAlternativas.addEventListener("click",() => respostaSelecionada(alternativa));
         caixaAlternativas.appendChild(botaoAlternativas);
     }
 }
 
+function respostaSelecionada(opcaoSelecionda){
+            atual++;
+            mostraPergunta();
+            const afirmacoes = opcaoSelecionda.afirmacoes
+
+        }
+        function mostraResultado(){
+            caixaPerguntas.textContent = "Cristiano Ronaldo um grande jogador de 39 anos, nascido na ilha da madeira, considerado o melhor jogador do mundo  foi 5x Vencedor da Champions-League, e 5x vencedor da Bolas de Ouro";
+            textoResultado.textContent = historiaFinal +=afirmacoes +" ";
+            caixaAlternativas ="";
+        }
 mostraPergunta();
